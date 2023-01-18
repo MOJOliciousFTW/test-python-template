@@ -1,0 +1,24 @@
+name: Create release notes
+
+changelog:
+  exclude:
+    authors:
+      - dependabot
+  categories:
+    - title: Breaking Changes 💥
+      labels:
+        - Semver-Major
+        - breaking-change :boom:
+    - title: Exciting New Features ✨
+      labels:
+        - Semver-Minor
+        - enhancement :sparkles:
+    - title: Bug fixes 🐛
+      labels:
+        - bug :bug:
+    - title: Dependencies ⬆️
+      labels:
+        - dependencies :arrow_up:
+    - title: Other Changes 🛠️
+      labels:
+        - "*"
