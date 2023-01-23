@@ -1,0 +1,17 @@
+name: build, docker build, publish to ghcr
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pyton-app-tests:
+    uses: MOJOliciousFTW/test-python-template/.github/workflows/python-app.yml
+    
+  code-ql:
+   uses: MOJOliciousFTW/test-python-template/.github/workflows/codeql-analysis.yml
+   
+  build-and-push-image-to-ghcr:
+    uses: MOJOliciousFTW/test-python-template/.github/workflows/build-and-push-image-to-ghcr.yml
