@@ -1,0 +1,34 @@
+name: Release pipeline
+
+on:
+  release:
+    types: [ published ]
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+  packages: write
+
+jobs:
+  pyton-app-tests:
+    uses: MOJOliciousFTW/test-python-template/.github/workflows/python-app.yml@${{github.ref_name}}
+
+  manual-approve:
+    name: Manual approval
+    runs-on: ubuntu-latest
+    needs: pyton-app-tests
+    environment:
+      name: test
+    steps:
+    - name: manual approve
+      run: |
+        echo "Manually approved on test"
+
+  code-ql:
+    needs: manual-approve
+    uses: MOJOliciousFTW/test-python-template/.github/workflows/codeql-analysis.yml@${{github.ref_name}}
+   
+  build-and-push-image-to-ghcr:
+    needs: code-ql
+    uses: MOJOliciousFTW/test-python-template/.github/workflows/build-and-push-image-to-ghcr.yml@${{github.ref_name}}
