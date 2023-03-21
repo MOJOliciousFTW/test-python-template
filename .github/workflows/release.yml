@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   pyton-app-tests:
-    uses: MOJOliciousFTW/test-python-template/.github/workflows/python-app.yml@${{github.ref_name}}
+    uses: MOJOliciousFTW/test-python-template/.github/workflows/python-app.yml@main
 
   manual-approve:
     name: Manual approval
@@ -27,8 +27,8 @@ jobs:
 
   code-ql:
     needs: manual-approve
-    uses: MOJOliciousFTW/test-python-template/.github/workflows/codeql-analysis.yml@${{github.ref_name}}
+    uses: MOJOliciousFTW/test-python-template/.github/workflows/codeql-analysis.yml@main
    
   build-and-push-image-to-ghcr:
     needs: code-ql
-    uses: MOJOliciousFTW/test-python-template/.github/workflows/build-and-push-image-to-ghcr.yml@${{github.ref_name}}
+    uses: MOJOliciousFTW/test-python-template/.github/workflows/build-and-push-image-to-ghcr.yml@main
